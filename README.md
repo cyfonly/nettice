@@ -20,7 +20,7 @@
 
   
 # 功能
-1. 对 httpRequest 的流程控制
+1. 对 HttpRequest 的流程控制
 2. 像普通方法一样处理 http 请求
 3. 对请求的数据自动装配，支持基本类型、List、Array 和 Map
 4. 提供 Render 方法渲染并写回响应，支持多种 content-type
@@ -62,11 +62,11 @@ public class PriArrayTest extends BaseAction{
 ```
 
 # 接收装配请求数据
-使用Read注解可以自动装配请求数组，支持不同的类型（基本类型、List、Array  和Map），可以设置默认值。
+使用Read注解可以自动装配请求数组，支持不同的类型（基本类型、List、Array  和Map），可以设置默认值。  
 这个例子演示了从 httpRequest 中获取基本类型的方法，如果没有值会自动设置默认值：
 ```
 public Render returnText(@Read(key="id", defaultValue="1" ) Integer id, @Read(key="proj") String proj){
-	System.out.println("recv params: id=" + id + ",proj=" + proj + ",author=" + author);
+	System.out.println("recv params: id=" + id + ",proj=" + proj);
 	return new Render(RenderType.TEXT, "had received your priType request.");
 }
 ```  
@@ -90,7 +90,7 @@ public Render postPriArrayList(@Read(key="ids") Integer[] ids, @Read(key="names"
 	return new Render(RenderType.JSON, obj.toJSONString());
 }
 ```
-这个例子演示了从 httpRequest 中获取 Map 类型的方法（注意，使用 Map 时限定了只能存在一个 Map<String,String> 参数）：
+这个例子演示了从 httpRequest 中获取 Map 类型的方法（**注意，使用 Map 时限定了只能存在一个 Map<String,String> 参数**）：
 ```
 public Render postPriMap(@Read(key="srcmap") Map<String,String> srcmap){
 	System.out.println("server output srcmap:");
