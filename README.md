@@ -1,5 +1,5 @@
 # nettp
-实现【命名空间】和【请求分发】功能的netty http服务端
+实现【命名空间】和【请求分发】功能的 netty http 服务端
   
   
 # 结构说明
@@ -23,7 +23,7 @@
 1. 对 httpRequest 的流程控制
 2. 像普通方法一样处理 http 请求
 3. 对请求的数据自动装配，支持基本类型、数组和 Map
-4. 提供render方法渲染并写回响应，支持多种content-type
+4. 提供 Render 方法渲染并写回响应，支持多种 content-type
 5. 支持可配置的命名空间
   
   
