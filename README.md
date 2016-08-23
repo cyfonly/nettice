@@ -120,4 +120,7 @@ public Render postPriMap(){
 }
 ```  
   
+# License
+MIT  
+
 
