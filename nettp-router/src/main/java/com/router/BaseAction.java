@@ -31,6 +31,7 @@ import com.router.annotation.Read;
 import com.router.convertor.PriTypeConverter;
 import com.router.convertor.PrimitiveType;
 import com.router.exception.ActionInvocationException;
+import com.router.exception.ValidationException;
 import com.router.utils.GenericsUtils;
 import com.router.utils.ValidateUtil;
 
@@ -150,6 +151,23 @@ public class BaseAction {
                 	}
                 }
                 value = list;
+                
+			}else if(Map.class.isAssignableFrom(type)){
+				if( index>0 ){
+					throw new ValidationException("");
+				}
+				
+				List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
+				if(types.size() == 2 && (types.get(0) != String.class || types.get(1) != String.class)){
+					throw new ValidationException("Map type parameter must both be String, Occuring Point: " + method.toGenericString());
+				}
+				
+				Map<String, String> valueMap = new HashMap<String, String>();
+				for(String paramKey : paramMap.keySet()){
+					List<String> valueList = paramMap.get(paramKey);
+					valueMap.put(paramKey, valueList.get(0));
+				}
+				value = valueMap;
 			}
 		}
 		return value;
@@ -227,6 +245,15 @@ public class BaseAction {
 						valueList = (ArrayList<String>) value;
 					}
 					paramMap.put(key, valueList);
+					
+				}else if(Map.class.isAssignableFrom(valueType)){
+					@SuppressWarnings("unchecked")
+					Map<String, String> tempMap = (Map<String, String>) value;
+					for(String tempKey : tempMap.keySet()){
+						List<String> tempList = new ArrayList<String>();
+						tempList.add(tempMap.get(tempKey));
+						paramMap.put(tempKey, tempList);
+					}
 				}
 			}
 			

@@ -23,7 +23,6 @@ import com.router.invocation.ActionProxy;
 public class RouterContext {
 	
 	public Map<String, ActionWrapper> actions = new HashMap<String, ActionWrapper>();
-	public Map<String,Method> response_config = new HashMap<String, Method>();
 	
 	public RouterContext(String configFilePath) throws Exception{
 		RouterConfig config = RouterConfig.parse(configFilePath);
