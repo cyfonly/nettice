@@ -126,48 +126,55 @@ public class BaseAction {
 	private Object getParamValue(Map<String, List<String>> paramMap, Class<?> type, Read read, Method method, int index) throws InstantiationException, IllegalAccessException{
 		Object value = null;
 		String key = read.key();
+		String defaultValue= read.defaultValue();
 		if(key != null && key.length() > 0){
 			List<String> params = paramMap.get(key);
-			if(PrimitiveType.isPriType(type)){
-				value = PriTypeConverter.getInstance().convertValue(params.get(0), type);
-				
-			}else if(type.isArray()){
-				Object[] objArray = params.toArray();
-				String[] strArray = objArray2StrArray(objArray);
-				value = PriTypeConverter.getInstance().convertValue(strArray, type);
-				
-			}else if(List.class.isAssignableFrom(type)){
-				List<Object> list = null;
-				List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
-				Class<?> listType = types.size() == 1?types.get(0):String.class;
-                if(List.class == type){
-                    list = new ArrayList<Object>();
-                }else{
-                    list = (List<Object>) type.newInstance();
-                }
-                for(int i = 0; i < params.size(); i++){
-                	if(params.get(i).length() > 0){
-                		list.add(PriTypeConverter.getInstance().convertValue(params.get(i), listType));
-                	}
-                }
-                value = list;
-                
-			}else if(Map.class.isAssignableFrom(type)){
-				if( index>0 ){
-					throw new ValidationException("");
+			if(params != null){
+				if(PrimitiveType.isPriType(type)){
+					value = PriTypeConverter.getInstance().convertValue(params.get(0), type);
+					
+				}else if(type.isArray()){
+					Object[] objArray = params.toArray();
+					String[] strArray = objArray2StrArray(objArray);
+					value = PriTypeConverter.getInstance().convertValue(strArray, type);
+					
+				}else if(List.class.isAssignableFrom(type)){
+					List<Object> list = null;
+					List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
+					Class<?> listType = types.size() == 1?types.get(0):String.class;
+	                if(List.class == type){
+	                    list = new ArrayList<Object>();
+	                }else{
+	                    list = (List<Object>) type.newInstance();
+	                }
+	                for(int i = 0; i < params.size(); i++){
+	                	if(params.get(i).length() > 0){
+	                		list.add(PriTypeConverter.getInstance().convertValue(params.get(i), listType));
+	                	}
+	                }
+	                value = list;
+	                
+				}else if(Map.class.isAssignableFrom(type)){
+					if( index>0 ){
+						throw new ValidationException("");
+					}
+					
+					List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
+					if(types.size() == 2 && (types.get(0) != String.class || types.get(1) != String.class)){
+						throw new ValidationException("Map type parameter must both be String, Occuring Point: " + method.toGenericString());
+					}
+					
+					Map<String, String> valueMap = new HashMap<String, String>();
+					for(String paramKey : paramMap.keySet()){
+						List<String> valueList = paramMap.get(paramKey);
+						valueMap.put(paramKey, valueList.get(0));
+					}
+					value = valueMap;
 				}
-				
-				List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
-				if(types.size() == 2 && (types.get(0) != String.class || types.get(1) != String.class)){
-					throw new ValidationException("Map type parameter must both be String, Occuring Point: " + method.toGenericString());
+			}else{
+				if(defaultValue != null && PrimitiveType.isPriType(type)){
+					value = PriTypeConverter.getInstance().convertValue(defaultValue, type);
 				}
-				
-				Map<String, String> valueMap = new HashMap<String, String>();
-				for(String paramKey : paramMap.keySet()){
-					List<String> valueList = paramMap.get(paramKey);
-					valueMap.put(paramKey, valueList.get(0));
-				}
-				value = valueMap;
 			}
 		}
 		return value;

@@ -24,6 +24,12 @@ public @interface Read {
 	public String key() default "";
 	
 	/**
+	 * 提供设置缺省值
+	 * @return 提供设置缺省值
+	 */
+	public String defaultValue() default "CORE_ANNOTATION_READ_DEFAULTVALUE_DEFAULT";
+	
+	/**
      * 是否校验参数为空
      * @return
      */

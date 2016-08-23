@@ -13,7 +13,7 @@ import com.router.ret.RenderType;
  */
 public class PriTypeTest extends BaseAction{
 	
-	public Render returnText(@Read(key="id") Integer id, @Read(key="proj") String proj, @Read(key="author") String author){
+	public Render returnText(@Read(key="id", defaultValue="1" ) Integer id, @Read(key="proj") String proj, @Read(key="author") String author){
 		System.out.println("recv params: id=" + id + ",proj=" + proj + ",author=" + author);
 		return new Render(RenderType.TEXT, "had received your priType request.");
 	}
