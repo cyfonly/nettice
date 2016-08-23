@@ -27,3 +27,35 @@
 5. 支持可配置的命名空间
   
   
+# URI 映射和命名空间
+使用方法名作为 URI 映射关键字，如果项目中存在同样名字的方法会产生冲突，开发者可以使用 @Namespaces 注解或者在 router.xml 配置中添加 namespaces 来修改 URI 映射，以规避此问题。  
+
+例如 com.server.action.PriTypeTest 提供了 returnTextUseNamespace 方法，com.server.action.subaction.PriArrayTest 也提供了 returnTextUseNamespace 方法，但两个方法实现不同功能。router 模块默认使用方法名进行 URI 映射，那么上述两个 returnTextUseNamespace 方法会产生冲突，开发者可以使用 @Namespace 注解修改 URI 映射：  
+'''
+public class PriTypeTest extends BaseAction{
+  @Namespace("/nettp/pri/")
+  public Render returnTextUseNamespace(@Read(key="id") Integer id, @Read(key="proj") String proj){
+    //do something
+    return new Render(RenderType.TEXT, "returnTextUseNamespace in [PriTypeTest]");
+  }
+}
+'''    
+  
+'''
+public class PriArrayTest extends BaseAction{
+  @Namespace("/nettp/array/")
+	public Render returnTextUseNamespace(@Read(key="ids") Integer[] ids, @Read(key="names") List<String> names){
+		//do something
+		return new Render(RenderType.TEXT, "returnTextUseNamespace in [PriArrayTest]");
+	}
+}
+'''
+
+也可以在 router.xml 中设置:
+'''
+<namespaces>
+  <namespace name="/nettp/pri/" packages="com.server.action.*"></namespace>
+  <namespace name="/nettp/array/" packages="com.server.action.subaction"></namespace>
+</namespaces>
+'''  
+
