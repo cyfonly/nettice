@@ -62,7 +62,7 @@ public class PriArrayTest extends BaseAction{
 ```
 
 # 接收装配请求数据
-使用Read注解可以自动装配请求数组，支持不同的类型（基本类型、List、Array  和Map），可以设置默认值。  
+使用Read注解可以自动装配请求数组，支持不同的类型（基本类型、List、Array  和Map），可以设置默认值（**目前仅支持基本类型设置 defaultValue**）。  
 这个例子演示了从 httpRequest 中获取基本类型的方法，如果没有值会自动设置默认值：
 ```
 public Render returnText(@Read(key="id", defaultValue="1" ) Integer id, @Read(key="proj") String proj){
