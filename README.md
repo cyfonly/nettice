@@ -1,5 +1,5 @@
 # nettp
-实现【命名空间】和【请求分发】功能的 netty http 服务端
+实现【`命名空间`】和【`请求分发`】功能的 `netty http` 服务端
   
   
 # 结构说明
@@ -16,21 +16,21 @@
   
 # 特性
 1. 接收装配请求数据、流程控制和渲染数据
-2. URI 到方法直接映射，以及命名空间
+2. `URI` 到方法直接映射，以及命名空间
 
   
 # 功能
-1. 对 HttpRequest 的流程控制
-2. 像普通方法一样处理 http 请求
-3. 对请求的数据自动装配，支持基本类型、List、Array 和 Map
-4. 提供 Render 方法渲染并写回响应，支持多种 Content-Type
+1. 对 `HttpRequest` 的流程控制
+2. 像普通方法一样处理 `http` 请求
+3. 对请求的数据自动装配，支持`基本类型`、`List`、`Array` 和 `Map`
+4. 提供 `Render` 方法渲染并写回响应，支持多种 `Content-Type`
 5. 支持可配置的命名空间
   
   
-# URI 映射和命名空间
+# `URI` 映射和命名空间
 使用方法名作为 `URI` 映射关键字，如果项目中存在同样名字的方法会产生冲突，开发者可以使用 `@Namespaces` 注解或者在 `router.xml` 配置中添加 `namespaces` 来修改 `URI` 映射，以规避此问题。  
 
-例如 `com.server.action.PriTypeTest` 提供了 `returnTextUseNamespace` 方法，`com.server.action.subaction.PriArrayTest` 也提供了 `returnTextUseNamespace` 方法，但两个方法实现不同功能。router 模块默认使用方法名进行 URI 映射，那么上述两个 `returnTextUseNamespace` 方法会产生冲突，开发者可以使用 `@Namespace` 注解修改 URI 映射：  
+例如 `com.server.action.PriTypeTest` 提供了 `returnTextUseNamespace` 方法，`com.server.action.subaction.PriArrayTest` 也提供了 `returnTextUseNamespace` 方法，但两个方法实现不同功能。`router` 模块默认使用方法名进行 `URI` 映射，那么上述两个 `returnTextUseNamespace` 方法会产生冲突，开发者可以使用 `@Namespace` 注解修改 `URI` 映射：  
 ```
 package com.server.action;
 public class PriTypeTest extends BaseAction{
@@ -62,7 +62,7 @@ public class PriArrayTest extends BaseAction{
 ```
 
 # 接收装配请求数据
-使用Read注解可以自动装配请求数组，支持不同的类型（基本类型、List、Array  和Map），可以设置默认值（**目前仅支持基本类型设置 defaultValue**）。  
+使用Read注解可以自动装配请求数组，支持不同的类型（`基本类型`、`List`、`Array`  和 `Map`），可以设置默认值（**目前仅支持基本类型设置 defaultValue**）。  
 这个例子演示了从 `HttpRequest` 中获取基本类型的方法，如果没有值会自动设置默认值：
 ```
 public Render returnText(@Read(key="id", defaultValue="1" ) Integer id, @Read(key="proj") String proj){
