@@ -107,8 +107,8 @@ public Render postPriMap(@Read(key="srcmap") Map<String,String> srcmap){
 ```  
   
 # 渲染数据
-处理方法可以通过返回 Render 对象向客户端返回特定格式的数据，一个 Render 对象由枚举类型 RenderType 和 data 两部分组成。
-router 模块会通过 RenderType 来为 Response 设置合适的 ContentType，开发者也可以扩展 Render 以及相关类来实现更多的类型支持。
+处理方法可以通过返回 Render 对象向客户端返回特定格式的数据，一个 Render 对象由枚举类型 RenderType 和 data 两部分组成。  
+router 模块会通过 RenderType 来为 Response 设置合适的 ContentType，开发者也可以扩展 Render 以及相关类来实现更多的类型支持。  
 例如这是一个返回 JSON 对象的例子，客户端将收到一个 Json 对象：
 ```
 public Render postPriMap(){
