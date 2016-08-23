@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
 import com.router.BaseAction;
+import com.router.annotation.Namespace;
 import com.router.annotation.Read;
 import com.router.ret.Render;
 import com.router.ret.RenderType;
@@ -31,6 +32,12 @@ public class PriArrayTest extends BaseAction{
 		obj.put("msg", "had received your Array/List request.");
 		
 		return new Render(RenderType.JSON, obj.toJSONString());
+	}
+	
+	@Namespace("/nettp/array/")
+	public Render returnTextUseNamespace(@Read(key="ids") Integer[] ids, @Read(key="names") List<String> names){
+		//do something
+		return new Render(RenderType.TEXT, "returnTextUseNamespace in [PriArrayTest]");
 	}
 	
 }
