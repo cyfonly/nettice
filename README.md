@@ -3,15 +3,15 @@
   
   
 # 结构说明
-![structure_descri](https://github.com/cyfonly/nettp/blob/master/nettp-server/src/main/resources/pictures/structure_descri.png "structure_descri.png")  
+![structure_descri](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/structure_descri.png "structure_descri.png") 
   
   
 # 消息路由整体设计  
-![design](https://github.com/cyfonly/nettp/blob/master/nettp-server/src/main/resources/pictures/design.png "design.png")
+![design](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/design.png "design.png")
   
   
 # Action请求处理
-![action_process](https://github.com/cyfonly/nettp/blob/master/nettp-server/src/main/resources/pictures/action_process.png "action_process.png")  
+![action_process](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/action_process.png "action_process.png")  
 
   
 # 特性
