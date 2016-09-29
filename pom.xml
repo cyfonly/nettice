@@ -6,10 +6,8 @@
   <packaging>pom</packaging>
   <modules>
   	<module>nettp-router</module>
-  	<module>nettp-codec</module>
   	<module>nettp-common</module>
   	<module>nettp-server</module>
-  	<module>nettp-config</module>
   </modules>
   
   <properties>

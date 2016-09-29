@@ -4,8 +4,8 @@ import org.aeonbits.owner.ConfigFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.config.ServerConf;
 import com.router.ActionDispatcher;
+import com.server.config.ServerConf;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

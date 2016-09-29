@@ -1,4 +1,4 @@
-package com.config;
+package com.server.config;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
@@ -17,23 +17,6 @@ public interface ServerConf extends Config{
 	@Key("server.${env}.port")
 	@DefaultValue("8080")
 	Integer port();
-	
-	@Key("server.${env}.mongo")
-	@DefaultValue("127.0.0.1:27017, 127.0.0.1:27018, 127.0.0.1:27019")
-	@ConverterClass(AddressConverter.class)
-	Address[] addresses();
-	
-	@Key("server.${env}.mongo.auth")
-	@DefaultValue("false")
-	Boolean auth();
-	
-	@Key("server.${env}.mongo.username")
-	@DefaultValue("admin")
-	String username();
-	
-	@Key("server.${env}.mongo.password")
-	@DefaultValue("123456")
-	String password();
 	
 	@Key("server.${env}.filedir")
 	@DefaultValue("D:\\")

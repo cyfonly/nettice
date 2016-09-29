@@ -8,19 +8,9 @@
   <artifactId>nettp-server</artifactId>
   
   <dependencies>
-  	<dependency>
-		<groupId>com.cyfonly</groupId>
-		<artifactId>nettp-config</artifactId>
-		<version>1.0.0</version>
-	</dependency>
 	<dependency>
 		<groupId>com.cyfonly</groupId>
 		<artifactId>nettp-router</artifactId>
-		<version>1.0.0</version>
-	</dependency>
-	<dependency>
-		<groupId>com.cyfonly</groupId>
-		<artifactId>nettp-codec</artifactId>
 		<version>1.0.0</version>
 	</dependency>
   </dependencies>
