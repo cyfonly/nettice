@@ -19,7 +19,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 
 /**
- * 基于 netty5 的 http1.1 服务端
+ * 基于 netty 的 http1.1 服务端
  * @author yunfeng.cheng
  * @create 2016-07-24
  */
@@ -53,7 +53,7 @@ public class HttpServer {
 	            .childOption(ChannelOption.TCP_NODELAY, true);
 			ChannelFuture future = bootstrap.bind(port).sync();
 			
-			logger.info("Netty-http server listening on port " + port);
+			logger.info("Nettp server listening on port " + port);
 			
 			future.channel().closeFuture().sync();
 		}finally{
@@ -70,9 +70,11 @@ public class HttpServer {
         }else{
             port = cfg.port();
         }
+		
 		//初始化请求路由配置
 		ActionDispatcher dispatcher = new ActionDispatcher();
 		dispatcher.init(cfg.routerConfigPath());
+		
 		//启动 netty-http 服务
 		new HttpServer(port).run();
 	}

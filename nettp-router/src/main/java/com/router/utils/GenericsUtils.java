@@ -22,13 +22,12 @@ public class GenericsUtils {
 	 * @param int index 第几个输入参数
 	 * @return 输入参数的泛型参数的实际类型集合, 如果没有实现ParameterizedType接口，即不支持泛型，所以直接返回空集合
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static List<Class> getMethodGenericParameterTypes(Method method, int index) {
 		List<Class> results = new ArrayList<Class>();
 		Type[] genericParameterTypes = method.getGenericParameterTypes();
 		if (index >= genericParameterTypes.length || index < 0) {
-			throw new RuntimeException("你输入的索引"
-					+ (index < 0 ? "不能小于0" : "超出了参数的总数"));
+			throw new RuntimeException("你输入的索引" + (index < 0 ? "不能小于0" : "超出了参数的总数"));
 		}
 		Type genericParameterType = genericParameterTypes[index];
 		if (genericParameterType instanceof ParameterizedType) {

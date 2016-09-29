@@ -24,6 +24,7 @@ public final class PriTypeConverter extends BaseSimpleTypeConverter{
 	/**
 	 * 对基本类型进行类型转换
 	 */
+	@SuppressWarnings("unused")
 	protected Object doConvertValue(Object value, Class<?> toType, Object... params) {
 		/**
 		 * 如果都是数组类型，则构造数组

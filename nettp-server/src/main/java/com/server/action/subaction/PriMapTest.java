@@ -18,7 +18,7 @@ public class PriMapTest extends BaseAction{
 	public Render postPriMap(@Read(key="srcmap") Map<String,String> srcmap){
 		System.out.println("server output srcmap:");
 		for(String key : srcmap.keySet()){
-			System.out.println(srcmap.get(key));
+			System.out.println(key + "=" + srcmap.get(key));
 		}
 		
 		JSONObject obj = new JSONObject();

@@ -45,7 +45,6 @@ public class BaseAction {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public Return processRequest(Method method, String methodName) throws Exception {
-		logger.debug("will invoke method : " + methodName);
 		if (method == null) {
 			throw new NoSuchMethodException("Can NOT find specified method: " + methodName);
 		}
@@ -65,7 +64,7 @@ public class BaseAction {
 		Get getAnnotation = method.getAnnotation(Get.class);
 		Post postAnnotation = method.getAnnotation(Post.class);
 		if(getAnnotation != null && postAnnotation != null){
-			throw new IllegalStateException("both get annotation and post annotation are used, only one can be used at an action");
+			throw new IllegalStateException("Both get annotation and post annotation are used, only one can be used at an action");
 		}
 		
 		//获得所调用方法的参数类型和所使用的Annotation数组
@@ -123,57 +122,59 @@ public class BaseAction {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Object getParamValue(Map<String, List<String>> paramMap, Class<?> type, Read read, Method method, int index) throws InstantiationException, IllegalAccessException{
 		Object value = null;
 		String key = read.key();
 		String defaultValue= read.defaultValue();
 		if(key != null && key.length() > 0){
-			List<String> params = paramMap.get(key);
-			if(params != null){
-				if(PrimitiveType.isPriType(type)){
-					value = PriTypeConverter.getInstance().convertValue(params.get(0), type);
-					
-				}else if(type.isArray()){
-					Object[] objArray = params.toArray();
-					String[] strArray = objArray2StrArray(objArray);
-					value = PriTypeConverter.getInstance().convertValue(strArray, type);
-					
-				}else if(List.class.isAssignableFrom(type)){
-					List<Object> list = null;
-					List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
-					Class<?> listType = types.size() == 1?types.get(0):String.class;
-	                if(List.class == type){
-	                    list = new ArrayList<Object>();
-	                }else{
-	                    list = (List<Object>) type.newInstance();
-	                }
-	                for(int i = 0; i < params.size(); i++){
-	                	if(params.get(i).length() > 0){
-	                		list.add(PriTypeConverter.getInstance().convertValue(params.get(i), listType));
-	                	}
-	                }
-	                value = list;
-	                
-				}else if(Map.class.isAssignableFrom(type)){
-					if( index>0 ){
-						throw new ValidationException("");
-					}
-					
-					List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
-					if(types.size() == 2 && (types.get(0) != String.class || types.get(1) != String.class)){
-						throw new ValidationException("Map type parameter must both be String, Occuring Point: " + method.toGenericString());
-					}
-					
-					Map<String, String> valueMap = new HashMap<String, String>();
-					for(String paramKey : paramMap.keySet()){
-						List<String> valueList = paramMap.get(paramKey);
-						valueMap.put(paramKey, valueList.get(0));
-					}
-					value = valueMap;
+			if(Map.class.isAssignableFrom(type)){
+				if(index > 0){
+					throw new ValidationException("");
 				}
+				
+				List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
+				if(types.size() == 2 && (types.get(0) != String.class || types.get(1) != String.class)){
+					throw new ValidationException("Map type parameter must both be String, Occuring Point: " + method.toGenericString());
+				}
+				
+				Map<String, String> valueMap = new HashMap<String, String>();
+				for(String paramKey : paramMap.keySet()){
+					List<String> valueList = paramMap.get(paramKey);
+					valueMap.put(paramKey, valueList.get(0));
+				}
+				value = valueMap;
 			}else{
-				if(defaultValue != null && PrimitiveType.isPriType(type)){
-					value = PriTypeConverter.getInstance().convertValue(defaultValue, type);
+				List<String> params = paramMap.get(key);
+				if(params != null){
+					if(PrimitiveType.isPriType(type)){
+						value = PriTypeConverter.getInstance().convertValue(params.get(0), type);
+						
+					}else if(type.isArray()){
+						Object[] objArray = params.toArray();
+						String[] strArray = objArray2StrArray(objArray);
+						value = PriTypeConverter.getInstance().convertValue(strArray, type);
+						
+					}else if(List.class.isAssignableFrom(type)){
+						List<Object> list = null;
+						List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
+						Class<?> listType = types.size() == 1?types.get(0):String.class;
+		                if(List.class == type){
+		                    list = new ArrayList<Object>();
+		                }else{
+		                    list = (List<Object>) type.newInstance();
+		                }
+		                for(int i = 0; i < params.size(); i++){
+		                	if(params.get(i).length() > 0){
+		                		list.add(PriTypeConverter.getInstance().convertValue(params.get(i), listType));
+		                	}
+		                }
+		                value = list;
+					}
+				}else{
+					if(defaultValue != null && PrimitiveType.isPriType(type)){
+						value = PriTypeConverter.getInstance().convertValue(defaultValue, type);
+					}
 				}
 			}
 		}
@@ -211,6 +212,8 @@ public class BaseAction {
 		return paramMap;
 	}
 	
+	//支持最常用的 application/json 、application/x-www-form-urlencoded 等几种 POST Content-type，可执行扩展
+	@SuppressWarnings("unchecked")
 	private Map<String, List<String>> getPostParamMap(FullHttpRequest fullRequest) {
 		Map<String, List<String>> paramMap = new HashMap<String, List<String>>();
 		HttpHeaders headers = fullRequest.headers();
@@ -254,7 +257,6 @@ public class BaseAction {
 					paramMap.put(key, valueList);
 					
 				}else if(Map.class.isAssignableFrom(valueType)){
-					@SuppressWarnings("unchecked")
 					Map<String, String> tempMap = (Map<String, String>) value;
 					for(String tempKey : tempMap.keySet()){
 						List<String> tempList = new ArrayList<String>();

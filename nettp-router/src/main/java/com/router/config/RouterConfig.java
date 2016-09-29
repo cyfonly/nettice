@@ -2,7 +2,6 @@ package com.router.config;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -43,8 +42,6 @@ public class RouterConfig {
 		Document document = null;
 		try{
 			document = saxReader.read(new InputSource(new FileInputStream(configFile)));
-		}catch(FileNotFoundException e){
-			
 		}catch(DocumentException e){
 			throw new ConfigurationException("config file parse error");
 		}
