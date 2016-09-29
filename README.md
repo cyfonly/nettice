@@ -2,10 +2,6 @@
 实现【`命名空间`】和【`请求分发`】功能的 `netty http` 服务端
   
   
-# 结构说明
-![structure_descri](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/structure_descri.png "structure_descri.png") 
-  
-  
 # 消息路由整体设计  
 ![design](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/design.png "design.png")
   
