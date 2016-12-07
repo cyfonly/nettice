@@ -7,7 +7,7 @@
   
   
 # Action请求处理
-![action_process](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/action_process.png "action_process.png")  
+![action_process](https://github.com/cyfonly/nettp/blob/master/pictures/action_process.png "action_process.png")  
 
   
 # 特性
