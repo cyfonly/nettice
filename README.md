@@ -3,7 +3,7 @@
   
   
 # 消息路由整体设计  
-![design](https://github.com/cyfonly/res-repository/blob/master/pictures/nettp/design.png "design.png")
+![design](https://github.com/cyfonly/nettp/blob/master/pictures/design.png "design.png")
   
   
 # Action请求处理
