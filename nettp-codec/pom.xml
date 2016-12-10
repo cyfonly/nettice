@@ -5,17 +5,12 @@
     <artifactId>nettp</artifactId>
     <version>1.0.0</version>
   </parent>
-  <artifactId>nettp-server</artifactId>
+  <artifactId>nettp-codec</artifactId>
   
   <dependencies>
 	<dependency>
 		<groupId>com.cyfonly</groupId>
-		<artifactId>nettp-router</artifactId>
-		<version>1.0.0</version>
-	</dependency>
-	<dependency>
-		<groupId>com.cyfonly</groupId>
-		<artifactId>nettp-codec</artifactId>
+		<artifactId>nettp-common</artifactId>
 		<version>1.0.0</version>
 	</dependency>
   </dependencies>

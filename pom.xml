@@ -8,6 +8,7 @@
   	<module>nettp-router</module>
   	<module>nettp-common</module>
   	<module>nettp-server</module>
+  	<module>nettp-codec</module>
   </modules>
   
   <properties>
