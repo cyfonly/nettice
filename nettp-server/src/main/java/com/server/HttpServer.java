@@ -19,7 +19,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 
 /**
- * 基于 netty 的 http1.1 服务端
+ * 基于 netty5.x 的 http1.1 服务端
  * @author yunfeng.cheng
  * @create 2016-07-24
  */
@@ -33,7 +33,7 @@ public class HttpServer {
 	}
 	
 	public void run() throws Exception{
-		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		
 		try{
@@ -44,8 +44,8 @@ public class HttpServer {
 	                @Override
 	                public void initChannel(SocketChannel ch) throws Exception {
 	                   ch.pipeline().addLast("codec",new HttpServerCodec())
-	                   		.addLast("aggregator",new HttpObjectAggregator(1024*1024))  //在处理 POST消息体时需要加上
-	                   		.addLast("dispatcher",new ActionDispatcher());
+	                   				.addLast("aggregator",new HttpObjectAggregator(1024*1024))  //在处理 POST消息体时需要加上
+	                   				.addLast("dispatcher",new ActionDispatcher());  //请求分发组件
 	                }
 	            })
 	            .option(ChannelOption.SO_BACKLOG, 1024)
@@ -63,20 +63,15 @@ public class HttpServer {
 	}
 	
 	public static void main(String[] args) throws Exception{
+		//使用owner管理项目配置  @see owner-doc
 		ServerConf cfg = ConfigFactory.create(ServerConf.class);
-		int port;
-		if(args.length > 0) {
-            port = Integer.parseInt(args[0]);
-        }else{
-            port = cfg.port();
-        }
 		
-		//初始化请求路由配置
+		//初始化请求分发路由配置
 		ActionDispatcher dispatcher = new ActionDispatcher();
 		dispatcher.init(cfg.routerConfigPath());
 		
-		//启动 netty-http 服务
-		new HttpServer(port).run();
+		//启动 netty 服务
+		new HttpServer(cfg.port()).run();
 	}
 
 }

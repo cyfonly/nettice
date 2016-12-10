@@ -1,5 +1,7 @@
 package com.router;
 
+import org.apache.http.HttpHeaders;
+
 import com.router.config.ActionWrapper;
 import com.router.invocation.ActionProxy;
 import com.router.utils.HttpRenderUtil;
@@ -29,6 +31,10 @@ public class ActionDispatcher extends ChannelHandlerAdapter{
 	private HttpRequest request;
 	private FullHttpResponse response;
 	private Channel channel;
+	
+	public ActionDispatcher(){
+		
+	}
 	
 	public void init(String configFilePath) throws Exception{
 		if(configFilePath == null){
@@ -91,7 +97,7 @@ public class ActionDispatcher extends ChannelHandlerAdapter{
 	private void writeResponse(boolean forceClose){
 		boolean close = isClose();
 		if(!close && !forceClose){
-			response.headers().add(org.apache.http.HttpHeaders.CONTENT_LENGTH, String.valueOf(response.content().readableBytes()));
+			response.headers().add(HttpHeaders.CONTENT_LENGTH, String.valueOf(response.content().readableBytes()));
 		}
 		ChannelFuture future = channel.write(response);
 		if(close || forceClose){
@@ -100,9 +106,9 @@ public class ActionDispatcher extends ChannelHandlerAdapter{
 	}
 	
 	private boolean isClose(){
-		if(request.headers().contains(org.apache.http.HttpHeaders.CONNECTION, CONNECTION_CLOSE, true) ||
+		if(request.headers().contains(HttpHeaders.CONNECTION, CONNECTION_CLOSE, true) ||
 				(request.protocolVersion().equals(HttpVersion.HTTP_1_0) && 
-				!request.headers().contains(org.apache.http.HttpHeaders.CONNECTION, CONNECTION_KEEP_ALIVE, true)))
+				!request.headers().contains(HttpHeaders.CONNECTION, CONNECTION_KEEP_ALIVE, true)))
 			return true;
 		return false;
 	}

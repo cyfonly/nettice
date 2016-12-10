@@ -34,8 +34,9 @@ public class ActionInvocation {
 	
 	protected Return invokeAction() throws Exception{
 		BaseAction action = proxy.getActionObject();
+		Method method = proxy.getMethod();
 		String methodName = proxy.getMethodName();
-		return action.processRequest(proxy.getMethod(), methodName);
+		return action.processRequest(method, methodName);
 	}
 	
 }

@@ -10,6 +10,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,7 +19,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.codec.CharEncoding;
-import org.apache.commons.codec.Charsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ public class BaseAction {
 	
 	public Return processRequest(Method method, String methodName) throws Exception {
 		if (method == null) {
-			throw new NoSuchMethodException("Can NOT find specified method: " + methodName);
+			throw new NoSuchMethodException("Can not find specified method: " + methodName);
 		}
         return exec(method);
 	}
@@ -94,7 +94,7 @@ public class BaseAction {
                 }
                 paramTarget[i] = paramValue;
 			}catch(Throwable e){
-				throw getInvokeException(method,paramTarget,new IllegalArgumentException("参数不合法:" + read.key(), e));
+				throw getInvokeException(method,paramTarget, new IllegalArgumentException("参数不合法:" + read.key(), e));
 			}
 		}
 		
@@ -104,9 +104,9 @@ public class BaseAction {
 			result = (Return)method.invoke(this, paramTarget);
 			
 		} catch(InvocationTargetException e){
-			throw getInvokeException(method,paramTarget,e.getCause());
+			throw getInvokeException(method, paramTarget, e.getCause());
 		} catch(IllegalArgumentException e){
-            throw getInvokeException(method,paramTarget,e);
+            throw getInvokeException(method, paramTarget, e);
 		}
 		return result;
 	}
@@ -130,7 +130,7 @@ public class BaseAction {
 		if(key != null && key.length() > 0){
 			if(Map.class.isAssignableFrom(type)){
 				if(index > 0){
-					throw new ValidationException("");
+					throw new ValidationException("Must have only one Map type parameter");
 				}
 				
 				List<Class> types = GenericsUtils.getMethodGenericParameterTypes(method, index);
@@ -201,7 +201,7 @@ public class BaseAction {
 		HttpMethod method = request.method();
 		if(method.equals(HttpMethod.GET)){
 			String uri = request.uri();
-			QueryStringDecoder queryDecoder = new QueryStringDecoder(uri, Charsets.toCharset(CharEncoding.UTF_8));
+			QueryStringDecoder queryDecoder = new QueryStringDecoder(uri, Charset.forName(CharEncoding.UTF_8));
 			paramMap = queryDecoder.parameters();
 			
 		}else if(method.equals(HttpMethod.POST)){
@@ -212,21 +212,21 @@ public class BaseAction {
 		return paramMap;
 	}
 	
-	//支持最常用的 application/json 、application/x-www-form-urlencoded 等几种 POST Content-type，可执行扩展
+	//目前支持最常用的 application/json 、application/x-www-form-urlencoded 几种 POST Content-type，可自行扩展！！！
 	@SuppressWarnings("unchecked")
 	private Map<String, List<String>> getPostParamMap(FullHttpRequest fullRequest) {
 		Map<String, List<String>> paramMap = new HashMap<String, List<String>>();
 		HttpHeaders headers = fullRequest.headers();
 		String contentType = getContentType(headers);
 		if(contentType.equals("application/json")){
-			String jsonStr = fullRequest.content().toString(Charsets.toCharset(CharEncoding.UTF_8));
+			String jsonStr = fullRequest.content().toString(Charset.forName(CharEncoding.UTF_8));
 			JSONObject obj = JSON.parseObject(jsonStr);
 			for(Entry<String, Object> item : obj.entrySet()){
-				List<String> valueList = null;
 				String key = item.getKey();
 				Object value = item.getValue();
 				Class<?> valueType = value.getClass();
 				
+				List<String> valueList = null;
 				if(paramMap.containsKey(key)){
 					valueList = paramMap.get(key);
 				}else{
@@ -267,7 +267,7 @@ public class BaseAction {
 			}
 			
 		}else if(contentType.equals("application/x-www-form-urlencoded")){
-			String jsonStr = fullRequest.content().toString(Charsets.toCharset(CharEncoding.UTF_8));
+			String jsonStr = fullRequest.content().toString(Charset.forName(CharEncoding.UTF_8));
 			QueryStringDecoder queryDecoder = new QueryStringDecoder(jsonStr, false);
 			paramMap = queryDecoder.parameters();
 		}
@@ -276,8 +276,8 @@ public class BaseAction {
 	}
 	
 	private String getContentType(HttpHeaders headers){
-		String typeStr = headers.get("Content-Type").toString();
-		String[] list = typeStr.split(";");
+		String contentType = headers.get("Content-Type").toString();
+		String[] list = contentType.split(";");
 		return list[0];
 	}
 	

@@ -5,9 +5,9 @@
 	</action-package>
 	
 	<namespaces>
-		<!--按包分配命名空间，多个匹配项时，采用目录级别对多的-->
+		<!--按包分配命名空间，多个匹配项时，采用目录级别最多的-->
 		<namespace name="/nettp/" packages="com.server.action.*"></namespace>
-		<namespace name="/nettp/sub/" packages="com.server.action.subaction"></namespace>
+		<namespace name="/nettp/sub/" packages="com.server.action.sub"></namespace>
 	</namespaces>
 	
 </router>

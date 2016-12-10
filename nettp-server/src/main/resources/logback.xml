@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">  
-	<contextName>netty-http</contextName>  
+	<contextName>nettp</contextName>  
 	
 	<!-- 输出到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
@@ -17,7 +17,7 @@
     	      
       	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       		<!-- daily rollover -->
-      		<fileNamePattern>/data/weblog/netty/nteey_http.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      		<fileNamePattern>/data/weblog/nettp/nettp.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       		<!-- keep 10 days' worth of history -->
       		<maxHistory>10</maxHistory>
     	</rollingPolicy>
@@ -37,7 +37,7 @@
       
       	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       		<!-- daily rollover -->
-      		<fileNamePattern>/data/weblog/netty/netty_error.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      		<fileNamePattern>/data/weblog/nettp/nettp_error.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       		<!-- keep 10 days' worth of history -->
       		<maxHistory>10</maxHistory>
     	</rollingPolicy>

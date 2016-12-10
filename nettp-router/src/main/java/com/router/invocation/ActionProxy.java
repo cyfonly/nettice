@@ -6,7 +6,7 @@ import com.router.BaseAction;
 import com.router.Return;
 
 /**
- * Action 代理，本身不做 action 调用的工作，只是调用 Invocation 本身。
+ * Action代理，本身不做action调用的工作，只是调用Invocation本身。
  * @author yunfeng.cheng
  * @create 2016-08-08
  */
@@ -16,6 +16,10 @@ public class ActionProxy extends BaseAction{
 	private ActionInvocation invocation;
 	private String methodName;
 	private Method method;
+	
+	public ActionProxy(){
+		
+	}
 	
 	public Return execute() throws Exception{
 		return invocation.invoke();

@@ -24,6 +24,9 @@ public class RouterConfig {
 	private List<String> actionPackages;
 	private List<Namespace> namespaces;
 	
+	private static final String NAME = "name";
+	private static final String  PACKAGES = "packages";
+	
 	public static RouterConfig parse(String filePath) throws Exception{
 		RouterConfig config = null;
 		filePath = RouterConfig.class.getClassLoader().getResource(filePath).getPath();
@@ -36,7 +39,7 @@ public class RouterConfig {
 		return config;
 	}
 	
-	public static RouterConfig parse(File configFile) throws Exception{
+	private static RouterConfig parse(File configFile) throws Exception{
 		RouterConfig config = new RouterConfig();
 		SAXReader saxReader = new SAXReader();
 		Document document = null;
@@ -75,8 +78,8 @@ public class RouterConfig {
 		List<Namespace> namespaces = new ArrayList<Namespace>();
 		while(elementIterator.hasNext()){
 			Element element = (Element)elementIterator.next();
-			String name = element.attributeValue("name");
-			String packages = element.attributeValue("packages");
+			String name = element.attributeValue(NAME);
+			String packages = element.attributeValue(PACKAGES);
 			Namespace ns = new Namespace(name, packages);
 			namespaces.add(ns);
 		}

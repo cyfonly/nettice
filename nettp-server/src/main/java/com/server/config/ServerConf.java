@@ -18,10 +18,6 @@ public interface ServerConf extends Config{
 	@DefaultValue("8080")
 	Integer port();
 	
-	@Key("server.${env}.filedir")
-	@DefaultValue("D:\\")
-	String filedir();
-	
 	@Key("server.${env}.router.config.path")
 	@DefaultValue("router.xml")
 	String routerConfigPath();
