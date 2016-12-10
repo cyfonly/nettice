@@ -38,6 +38,13 @@ public class HttpRenderUtil {
 		return render(xml, "text/xml;charset=UTF-8");
 	}
 	
+	/**
+	 * 输出纯HTML
+	 */
+	public static FullHttpResponse renderHTML(String html) {
+		return render(html, "text/html;charset=UTF-8");
+	}
+	
 	public static FullHttpResponse getErroResponse(){
 		return render("Server error", "text/plain;charset=UTF-8");
 	}

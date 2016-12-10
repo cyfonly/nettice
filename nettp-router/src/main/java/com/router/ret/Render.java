@@ -24,7 +24,7 @@ public class Render implements Return{
 		this.data = data;
 		this.renderType = renderType;
 	}
-
+	
 	@Override
 	public FullHttpResponse process() throws Exception {
 		FullHttpResponse response;
@@ -37,6 +37,9 @@ public class Render implements Return{
 			break;
 		case XML:
 			response = HttpRenderUtil.renderXML(data);
+			break;
+		case HTML:
+			response = HttpRenderUtil.renderHTML(data);
 			break;
 		default:
 			response = HttpRenderUtil.getErroResponse();

@@ -9,6 +9,7 @@ public enum RenderType {
 	
 	JSON, 
 	XML, 
-	TEXT
+	TEXT,
+	HTML
 	
 }
