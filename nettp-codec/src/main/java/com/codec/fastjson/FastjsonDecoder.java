@@ -11,7 +11,7 @@ public class FastjsonDecoder extends MessageToMessageDecoder<HttpRequest> {
 	@Override
 	protected void decode(ChannelHandlerContext ctx, HttpRequest msg, List<Object> out) throws Exception {
 		// TODO Auto-generated method stub
-		
+		 
 	}
 
 }
