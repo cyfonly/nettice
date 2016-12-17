@@ -1,5 +1,5 @@
-# nettp
-基于netty http协议栈的轻量级MVC种子项目
+# nettice
+基于netty http协议栈的轻量级MVC组件
   
 # 特性
 1. 接收装配请求数据、流程控制和渲染数据
@@ -114,6 +114,10 @@ public Render postPriMap(){
 	return new Render(RenderType.JSON, obj.toJSONString());
 }
 ```  
+  
+# TODO LIST 
+1. java bean支持  
+  
   
 # License
 MIT  
