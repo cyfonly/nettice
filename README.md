@@ -1,4 +1,5 @@
-# nettice
+![design](https://github.com/cyfonly/nettice/blob/master/pictures/nettice.png "nettice")  
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cyfonly/nettice/blob/master/LICENCE)  
 基于netty http协议栈的轻量级MVC组件
   
 # 特性
