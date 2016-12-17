@@ -22,7 +22,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
  * 基于 netty5.x 的 http1.1 服务端
  * @author yunfeng.cheng
  * @create 2016-07-24
- */ 
+ */
 public class HttpServer {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
