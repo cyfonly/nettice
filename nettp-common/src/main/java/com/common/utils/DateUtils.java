@@ -7,7 +7,7 @@ import java.util.Date;
  * 时间工具类
  * @author yunfeng.cheng
  * @create 2016-07-24
- */
+ */ 
 public class DateUtils {
 	
 	public static String getDateStr(String pattern){
