@@ -1,6 +1,6 @@
 ![design](https://github.com/cyfonly/nettice/blob/master/pictures/nettice.png "nettice")  
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cyfonly/nettice/blob/master/LICENCE)  
-基于netty http协议栈的轻量级MVC组件
+基于netty http协议栈的轻量级流程控制组件
   
 # 特性
 1. 接收装配请求数据、流程控制和渲染数据
