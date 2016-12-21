@@ -15,7 +15,7 @@
 5. 支持可配置的命名空间
   
   
-# 消息路由整体设计  
+# 请求分发整体设计
 ![design](https://github.com/cyfonly/nettp/blob/master/pictures/design.png "design.png")
   
   
