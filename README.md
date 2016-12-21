@@ -28,7 +28,7 @@
 ```  
 
 # `URI` 映射和命名空间
-使用方法名作为 `URI` 映射关键字，如果项目中存在同样名字的方法会产生冲突，开发者可以使用 `@Namespaces` 注解或者在 `router.xml` 配置中添加 `namespaces` 来修改 `URI` 映射，以规避此问题。  
+使用方法名作为 `URI` 映射关键字，如果项目中存在同样名字的方法会产生冲突，开发者可以使用 `@Namespaces` 注解或者在 `nettice.xml` 配置中添加 `namespaces` 来修改 `URI` 映射，以规避此问题。  
 
 例如 `com.server.action.DemoAction` 提供了 `returnTextUseNamespace()` 方法，`com.server.action.sub.SubDemoAction` 也提供了 `returnTextUseNamespace()` 方法，但两个方法实现不同功能。`nettice` 组件默认使用方法名进行 `URI` 映射，那么上述两个 `returnTextUseNamespace()` 方法会产生冲突，开发者可以使用 `@Namespace` 注解修改 `URI` 映射：  
 ```
