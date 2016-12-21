@@ -21,7 +21,11 @@
   
 # Action请求处理
 ![action_process](https://github.com/cyfonly/nettp/blob/master/pictures/action_process.png "action_process.png")  
-
+  
+# Usage  
+```
+.addLast("dispatcher",new ActionDispatcher())
+```  
 
 # `URI` 映射和命名空间
 使用方法名作为 `URI` 映射关键字，如果项目中存在同样名字的方法会产生冲突，开发者可以使用 `@Namespaces` 注解或者在 `router.xml` 配置中添加 `namespaces` 来修改 `URI` 映射，以规避此问题。  
