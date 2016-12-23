@@ -9,8 +9,8 @@ import com.router.utils.HttpRenderUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpVersion;
@@ -21,7 +21,7 @@ import io.netty.util.ReferenceCountUtil;
  * @author yunfeng.cheng
  * @create 2016-08-01
  */
-public class ActionDispatcher extends ChannelHandlerAdapter{
+public class ActionDispatcher extends ChannelInboundHandlerAdapter{
 	
 	private static final String CONNECTION_KEEP_ALIVE = "keep-alive";
     private static final String CONNECTION_CLOSE = "close";
