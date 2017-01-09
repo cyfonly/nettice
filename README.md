@@ -24,6 +24,8 @@
   
 # Usage  
 #### 1. Maven  
+> 刚上传至Maven中央仓库，预计明早八点（2017-01-10 08:00）可用。  
+
 ```
 <dependency>
   <groupId>com.github.cyfonly</groupId>
