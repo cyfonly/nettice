@@ -23,6 +23,15 @@
 ![action_process](https://github.com/cyfonly/nettp/blob/master/pictures/action_process.png "action_process.png")  
   
 # Usage  
+#### 1. Maven  
+```
+<dependency>
+  <groupId>com.github.cyfonly</groupId>
+  <artifactId>nettice-core</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```   
+#### 2. In your project code
 ```
 .addLast("dispatcher",new ActionDispatcher())
 ```  
