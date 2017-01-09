@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <router>
 	<action-package>
-		<package>com.server.action</package>
+		<package>com.cyfonly.nettice.examples.action</package>
 	</action-package>
 	
 	<namespaces>
 		<!--按包分配命名空间，多个匹配项时，采用目录级别最多的-->
-		<namespace name="/nettp/" packages="com.server.action.*"></namespace>
-		<namespace name="/nettp/sub/" packages="com.server.action.sub"></namespace>
+		<namespace name="/nettp/" packages="com.cyfonly.nettice.examples.action.*"></namespace>
+		<namespace name="/nettp/sub/" packages="com.cyfonly.nettice.examples.action.sub"></namespace>
 	</namespaces>
 	
 </router>
