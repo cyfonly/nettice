@@ -23,8 +23,7 @@
 ![action_process](https://github.com/cyfonly/nettp/blob/master/pictures/action_process.png "action_process.png")  
   
 # Usage  
-#### 1. Maven  
-> 刚上传至Maven中央仓库，预计明早八点（2017-01-10 08:00）可用。  
+#### 1. Maven   
 
 ```
 <dependency>
