@@ -1,5 +1,5 @@
 ![design](https://github.com/cyfonly/nettice/blob/master/pictures/nettice.png "nettice")  
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cyfonly/nettice/blob/master/LICENCE)  [![Built with Maven](http://maven.apache.org/images/logos/maven-feather.png)](http://search.maven.org/#search%7Cga%7C1%7Ccyfonly)  
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cyfonly/nettice/blob/master/LICENSE)  [![Built with Maven](http://maven.apache.org/images/logos/maven-feather.png)](http://search.maven.org/#search%7Cga%7C1%7Ccyfonly)  
 基于netty http协议栈的轻量级 MVC 组件
   
 # 特性
@@ -135,6 +135,6 @@ public Render postPriMap(){
   
   
 # License
-MIT  
+基于 Apache License 2.0 发布。有关详细信息，请参阅 [LICENSE](https://github.com/cyfonly/nettice/blob/master/LICENSE)。
 
 
